@@ -1,99 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <nav className="bg-[#80AECC] px-4 py-2 flex items-center justify-between relative z-50">
-      {/* Logo and Brand Name */}
-      <div className="flex items-center space-x-2">
-        <Link href="/">
-          <Image
-            src="/logo.webp"
-            alt="Logo"
-            width={200}
-            height={120}
-            className="object-contain"
-          />
-        </Link>
-      </div>
-
-      {/* Hamburger Icon */}
-      <button
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        className="md:hidden text-[#00121f] text-3xl focus:outline-none"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        {menuOpen ? "X" : "☰"}
-      </button>
-
-      {/* Desktop Links */}
-      <ul className="hidden md:flex space-x-8 text-[#00121f] font-medium">
-        <li>
-          <Link href="/features" className="hover:text-blue-600 transition">
-            Features
-          </Link>
-        </li>
-        <li>
-          <Link href="/how-it-works" className="hover:text-blue-600 transition">
-            How it Works
-          </Link>
-        </li>
-        <li>
-          <Link href="/about" className="hover:text-blue-600 transition">
-            About
-          </Link>
-        </li>
-      </ul>
-
-      {/* Desktop Contact Button */}
-      <div className="hidden md:block">
-        <Link href="/contact">
-          <button className="bg-[#2A77AA] text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 text-sm">
-            Contact Us
-          </button>
-        </Link>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden absolute top-full left-0 w-full bg-[#80AECC] flex flex-col items-center space-y-4 py-6 transition-all duration-300 ease-in-out ${
-          menuOpen
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-10 opacity-0 pointer-events-none"
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4 glass-panel border-b border-white/20" : "py-6 bg-transparent"
         }`}
-      >
-        <Link
-          href="/features"
-          className="hover:text-blue-600 text-lg"
-          onClick={() => setMenuOpen(false)}
-        >
-          Features
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white shadow-md group-hover:scale-105 transition-transform duration-300">
+            <Image
+              src="/logo.webp"
+              alt="Elenii Shepherd Logo"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-gray-900"}`}>
+            Elenii Shepherd
+          </span>
         </Link>
-        <Link
-          href="/how-it-works"
-          className="hover:text-blue-600 text-lg"
-          onClick={() => setMenuOpen(false)}
-        >
-          How it Works
-        </Link>
-        <Link
-          href="/about"
-          className="hover:text-blue-600 text-lg"
-          onClick={() => setMenuOpen(false)}
-        >
-          About
-        </Link>
-        <Link href="/contact" onClick={() => setMenuOpen(false)}>
-          <button className="bg-[#2A77AA] text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 text-sm">
-            Contact Us
+
+        <div className="hidden md:flex items-center gap-8">
+          <button
+            onClick={() => scrollToSection("how-it-works")}
+            className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+          >
+            How it Works
           </button>
-        </Link>
+          <button
+            onClick={() => scrollToSection("testimonials")}
+            className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+          >
+            Testimonials
+          </button>
+          <button
+            onClick={() => window.open("https://github.com/Elenii-Org/Elenii-Shepherd/releases/tag/v1.0.0-mvp", "_blank")}
+            className="btn-primary px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl"
+          >
+            Download App
+          </button>
+        </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
