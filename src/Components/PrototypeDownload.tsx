@@ -11,6 +11,10 @@ export default function PrototypeDownload() {
     try {
       const response = await fetch("/api/downloads", { method: "POST" });
       const data = await response.json();
+      if (!response.ok) {
+        window.alert(data.error ?? "The prototype download is temporarily unavailable.");
+        return;
+      }
       setCount(data.count);
       window.dispatchEvent(new CustomEvent("elenii:prototype-download", { detail: { version: "0.1.0" } }));
       const analyticsWindow = window as typeof window & { dataLayer?: Record<string, unknown>[] };

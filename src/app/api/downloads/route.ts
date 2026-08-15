@@ -15,8 +15,12 @@ export async function GET() {
 }
 
 export async function POST() {
+  const downloadUrl = process.env.APK_DOWNLOAD_URL;
+  if (!downloadUrl) {
+    return NextResponse.json({ error: "The prototype download is temporarily unavailable." }, { status: 503 });
+  }
   const count = (await readCount()) + 1;
   try { await fs.writeFile(counterPath, JSON.stringify({ count }), "utf8"); }
   catch (error) { console.error("Download counter storage is not writable", error); }
-  return NextResponse.json({ count, downloadUrl: "/api/downloads/file" });
+  return NextResponse.json({ count, downloadUrl });
 }
