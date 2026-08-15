@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image"; // ✅ Required for using <Image>
 import Link from "next/link";
-import { FaGooglePlay, FaApple } from "react-icons/fa";
 
 export default function ContactPage() {
   return (
@@ -38,8 +37,8 @@ export default function ContactPage() {
         <div className="flex justify-center items-center">
           <div className="w-full aspect-[4/3] sm:aspect-auto sm:h-full max-w-md relative rounded-lg shadow-md overflow-hidden">
             <Image
-              src="/contactimage.webp"
-              alt="Contact illustration"
+              src="/media/field-team.jpeg"
+              alt="An Elenii Shepherd team member speaking with a visually impaired participant"
               fill
               className="object-cover rounded-lg"
             />
@@ -54,7 +53,7 @@ export default function ContactPage() {
                 Get in touch!
               </h2>
               <p className="text-gray-600">
-                Fill out the form and we will contact you within 24 hours.
+                Tell us whether you are reaching out about media, partnership, research or product access.
               </p>
 
               <div className="mb-2">
@@ -101,26 +100,6 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Download Section */}
-      <div className="bg-[#5592BB] mt-10 shadow-2xl rounded-lg p-8 max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-start gap-8">
-        {/* Text Section */}
-        <div className="mt-4 lg:mt-8">
-          <h1 className="text-2xl font-bold text-[#00121f] mb-2 py-2">
-            Download the Elenii Shepherd app
-          </h1>
-          <p className="mb-4 text-[#00121f] py-3">
-            Available on Android &amp; iOS.
-          </p>
-          <button
-            className="flex items-center gap-3 bg-[#004D80] text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition"
-            aria-label="Download the Elenii Shepherd app"
-          >
-            <FaGooglePlay size={30} />
-            <FaApple size={30} className="text-[#00121f]" />
-            <span className="text-[#00121f] font-bold">Download App</span>
-          </button>
-        </div>
-      </div>
     </section>
   );
 }

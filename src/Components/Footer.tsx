@@ -1,51 +1,9 @@
-import { FaTwitter, FaFacebookF, FaGithub } from "react-icons/fa";
-import { CiInstagram } from "react-icons/ci";
-
+import Image from "next/image";
+import Link from "next/link";
 export function Footer() {
-  return (
-    <footer className="bg-[#ccdeeb] text-white px-4 py-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-        <div className="sm:col-span-2">
-          <h1 className="text-lg sm:text-xl font-bold mb-3 text-[#00121f]">About Elenii Shepherd</h1>
-          <p className="text-sm leading-relaxed mb-4 text-gray-400">
-            We believe accessibility is a right, not a luxury. Vision Helper empowers individuals with visual impairments by turning everyday smartphones into smart accessibility devices.
-          </p>
-          <div className="flex gap-4 text-xl text-[#00121f]">
-            <a href="#" aria-label="Twitter"><FaTwitter className="hover:text-blue-400 transition" /></a>
-            <a href="#" aria-label="Facebook"><FaFacebookF className="hover:text-blue-600 transition" /></a>
-            <a href="#" aria-label="Instagram"><CiInstagram className="hover:text-pink-400 transition" /></a>
-            <a href="#" aria-label="GitHub"><FaGithub className="hover:text-gray-400 transition" /></a>
-          </div>
-        </div>
-        <div>
-          <h1 className="font-semibold mb-3 text-[#00121f]">Company</h1>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li><a href="#" className="hover:underline">About</a></li>
-            <li><a href="#" className="hover:underline">Features</a></li>
-            <li><a href="#" className="hover:underline">Career</a></li>
-          </ul>
-        </div>
-        <div>
-          <h1 className="font-semibold mb-3 text-[#00121f]">Help</h1>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li><a href="#" className="hover:underline">Customer Support</a></li>
-            <li><a href="#" className="hover:underline">Terms &amp; Condition</a></li>
-            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h1 className="font-semibold mb-3 text-[#00121f]">Resources</h1>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li><a href="#" className="hover:underline">Accessibility Guide</a></li>
-            <li><a href="#" className="hover:underline">Video Tutorial</a></li>
-            <li><a href="#" className="hover:underline">How it works</a></li>
-            <li><a href="#" className="hover:underline">Voice Command Cheatsheet</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="mt-10 pt-4 text-center text-sm text-gray-400">
-        &copy; 2025 festcreates, Inc. All rights reserved.
-      </div>
-    </footer>
-  );
+  return <footer className="bg-[#061a2c] px-5 py-14 text-white"><div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+    <div className="max-w-md"><Image src="/media/wordmark-white.webp" alt="Elenii Shepherd" width={270} height={72} className="mb-6 h-16 w-auto"/><p className="leading-relaxed text-slate-300">Building accessible technology and entrepreneurship pathways with visually impaired people across Nigeria.</p></div>
+    <div><h2 className="mb-4 font-bold">Explore</h2><div className="space-y-3 text-sm text-slate-300"><Link className="block hover:text-white" href="/about">About</Link><Link className="block hover:text-white" href="/work">Our work</Link><Link className="block hover:text-white" href="/gallery">Gallery</Link><Link className="block hover:text-white" href="/opportunities">Opportunities</Link></div></div>
+    <div><h2 className="mb-4 font-bold">Stay connected</h2><p className="mb-4 text-sm leading-relaxed text-slate-300">Follow current field work, programme news and partnership updates from the team.</p><a href="https://ng.linkedin.com/company/elenii-shepherd" target="_blank" rel="noreferrer" className="block font-semibold text-secondary hover:underline">Follow on LinkedIn ↗</a><Link href="/contact" className="mt-3 block font-semibold text-secondary hover:underline">Contact the team →</Link></div>
+  </div><div className="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6 text-sm text-slate-400">© {new Date().getFullYear()} Elenii Shepherd. Built for inclusion.</div></footer>;
 }

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@fontsource/outfit/index.css";
 
 :root {
   /* Brand Colors */
@@ -27,7 +28,7 @@
   --color-accent: var(--color-accent);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-outfit);
+  --font-sans: "Outfit", "Arial", sans-serif;
 }
 
 body {
@@ -36,6 +37,21 @@ body {
   font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
 }
+
+html { scroll-behavior: smooth; }
+::selection { background: #ffc107; color: #061a2c; }
+.section-pad { padding: 7rem 0; }
+.eyebrow { color: var(--color-primary); font-size: .75rem; font-weight: 800; letter-spacing: .17em; }
+.section-title { margin-top: 1.25rem; margin-bottom: 1.5rem; max-width: 46rem; font-size: clamp(2.25rem, 5vw, 3.65rem); line-height: 1.06; letter-spacing: -.035em; font-weight: 750; color: #0f172a; }
+.body-copy { max-width: 42rem; font-size: 1.08rem; line-height: 1.85; color: #526176; }
+.stat { display: block; font-size: 1.75rem; line-height: 1; color: #0f172a; }
+.stat-label { display: block; margin-top: .55rem; font-size: .75rem; line-height: 1.35; color: #64748b; }
+@media (max-width: 640px) { .section-pad { padding: 5rem 0; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+@keyframes partner-scroll { to { transform: translateX(-42%); } }
+.partner-track { animation: partner-scroll 24s linear infinite; }
+.partner-track:hover { animation-play-state: paused; }
 
 /* Utility Classes */
 .glass-panel {

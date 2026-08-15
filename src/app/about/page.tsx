@@ -1,84 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
-
+import type { Metadata } from "next";
+import DailyNote from "@/Components/DailyNote";
+import { SitePage } from "@/Components/SitePage";
+export const metadata: Metadata = { title: "About Our Ecosystem", description: "Discover Elenii Shepherd's ecosystem connecting assistive technology, education, community support and economic opportunity for visually impaired people.", alternates: { canonical: "/about" } };
 export default function AboutPage() {
-  return (
-    <section className="bg-[#ccdeeb] py-12 px-4" aria-labelledby="about-title">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Top heading and logo for small screens */}
-        <div className="flex items-center gap-4 mb-8 md:hidden">
-          <Link href="/" className="hover:opacity-80 transition">
-            <Image
-              src="/logo.webp"
-              alt="Logo"
-              width={200}
-              height={120}
-              className="object-contain"
-            />
-          </Link>
-          <h1
-            id="about-title"
-            className="text-2xl font-bold text-[#00121f]"
-          >
-            About us
-          </h1>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-10 items-stretch">
-          {/* Left: Image */}
-          <div className="relative h-[500px] w-full rounded-lg shadow-lg overflow-hidden">
-            <Image
-              src="/aboutimage.webp"
-              alt="People using Elenii Shepherd app"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          {/* Right: Text Content */}
-          <div className="flex flex-col justify-center h-full">
-            {/* Heading and logo for medium+ screens */}
-            <div className="hidden md:flex items-center gap-4 mb-4">
-              <Link href="/" className="hover:opacity-80 transition">
-                <Image
-                  src="/logofram.png"
-                  alt="Logo"
-                  width={60}
-                  height={50}
-                  className="object-contain"
-                />
-              </Link>
-              <h1
-                id="about-title"
-                className="text-3xl font-bold text-[#00121f]"
-              >
-                About us
-              </h1>
-            </div>
-
-            <h2 className="text-2xl font-bold text-[#00121f] mb-4">
-              Reimagining Independence Through Innovation
-            </h2>
-            <p className="text-[#00121f] mb-6 leading-relaxed text-sm md:text-base">
-              At Elenii Shepherd, we believe that everyone deserves seamless access
-              to the digital world. Our mission is to empower individuals with
-              visual impairments by breaking down barriers and enabling effortless
-              navigation, communication, and exploration through smart, inclusive
-              technology.
-              <br /><br />
-              Our mobile application transforms smartphones into powerful tools that
-              guide, inform, and support users in real-time. From voice-assisted
-              navigation and offline maps to smart text readers and object recognition,
-              Elenii Shepherd opens up a new realm of possibilities—where vision loss
-              doesn&apos;t mean losing access.
-              <br /><br />
-              Driven by empathy. Built with purpose. Designed for independence. Join a
-              growing community committed to redefining accessibility and digital freedom.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <SitePage eyebrow="ABOUT ELENII SHEPHERD" title="An accessibility and entrepreneurship ecosystem built for scale." intro="From assistive hardware and offline AI to founder development, Elenii Shepherd is building connected pathways for visually impaired people across Nigeria.">
+    <section className="px-5 py-20"><div className="mx-auto max-w-7xl"><DailyNote/><div className="mt-20 grid gap-14 lg:grid-cols-[.9fr_1.1fr]"><div className="relative min-h-[600px]"><Image src="/media/community-circle.jpeg" alt="A community gathered around an Elenii Shepherd wearable demonstration" fill className="object-cover" sizes="50vw"/></div><div className="max-w-2xl"><p className="eyebrow">WHERE WE ARE NOW</p><h2 className="section-title">Community access in three cities. A global innovation partnership. An incubator coming next.</h2><div className="space-y-6 text-lg leading-8 text-slate-700"><p>Elenii Shepherd has reached more than 2,000 people and counting, with access to Nigerian Association of the Blind chapter networks in Jos, Abuja and Lagos—creating a foundation for research, outreach and programme delivery grounded in real communities.</p><p>Through a strategic partnership with the Dunin-Deshpande Innovation Centre at Queen&apos;s University, Canada, the organisation is advancing accessibility within the Jim Leech Mastercard Foundation Fellowship and developing a dedicated entrepreneurship programme for visually impaired people.</p><p>The next major chapter is the Elenii Shepherd Incubator: a structured pathway from selection and training to mentorship, venture development, pitching, funding opportunities and growth. The programme is being prepared for launch later in 2026.</p></div></div></div></div></section>
+    <section className="border-y border-slate-300 bg-white px-5 py-20"><div className="mx-auto max-w-7xl"><p className="eyebrow">WHAT WE BELIEVE</p><div className="mt-10 grid gap-px bg-slate-300 md:grid-cols-3">{[["01","Build with, not for","People who experience accessibility barriers belong in the research, design and leadership of solutions."],["02","Offline is access","If a tool depends on reliable internet, connectivity can become another exclusion."],["03","Opportunity matters","Independence includes the chance to learn, build, earn, lead and create ventures."]].map(([n,t,d])=><article key={n} className="bg-white p-8"><span className="font-mono text-sm text-primary">{n}</span><h3 className="mt-8 text-2xl font-bold">{t}</h3><p className="mt-4 leading-7 text-slate-600">{d}</p></article>)}</div></div></section>
+  </SitePage>;
 }

@@ -1,68 +1,17 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-
+import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+const links = [["About", "/about"], ["Our work", "/work"], ["Gallery", "/gallery"], ["Opportunities", "/opportunities"], ["Test the app", "/prototype"]];
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50);
-  });
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4 glass-panel border-b border-white/20" : "py-6 bg-transparent"
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white shadow-md group-hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/logo.webp"
-              alt="Elenii Shepherd Logo"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-gray-900"}`}>
-            Elenii Shepherd
-          </span>
-        </Link>
-
-        <div className="hidden md:flex items-center gap-8">
-          <button
-            onClick={() => scrollToSection("how-it-works")}
-            className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-          >
-            How it Works
-          </button>
-          <button
-            onClick={() => scrollToSection("testimonials")}
-            className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-          >
-            Testimonials
-          </button>
-          <button
-            onClick={() => window.open("https://github.com/Elenii-Org/Elenii-Shepherd/releases/tag/v1.0.0-mvp", "_blank")}
-            className="btn-primary px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl"
-          >
-            Download App
-          </button>
-        </div>
-      </div>
-    </motion.nav>
-  );
+  const [open, setOpen] = useState(false);
+  return <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
+    <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8" aria-label="Main navigation">
+      <Link href="/" className="block" aria-label="Elenii Shepherd home"><Image src="/media/wordmark-black.webp" alt="Elenii Shepherd" width={225} height={60} className="h-12 w-auto" priority/></Link>
+      <div className="hidden items-center gap-8 md:flex">{links.map(([label, href]) => <Link key={href} href={href} className="text-sm font-semibold text-slate-600 transition hover:text-primary">{label}</Link>)}<Link href="/contact" className="border-b-2 border-secondary px-1 py-2 text-sm font-bold text-slate-900">Talk to us</Link></div>
+      <button className="rounded-lg p-2 text-2xl md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>{open ? <HiX/> : <HiOutlineMenuAlt3/>}</button>
+    </nav>
+    {open && <div className="border-t border-slate-100 bg-white px-5 pb-6 md:hidden">{links.map(([label, href]) => <Link key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-slate-100 py-4 font-semibold">{label}</Link>)}<Link href="/contact" onClick={() => setOpen(false)} className="mt-5 block border-b-2 border-secondary px-1 py-3 text-center font-bold">Talk to us</Link></div>}
+  </header>;
 }
